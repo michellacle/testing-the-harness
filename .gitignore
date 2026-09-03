@@ -1,6 +1,7 @@
 node_modules/
 .bench/artifacts/
 .bench/model/
+.bench/runtime/
 .bench/workspaces/
 .bench/agent-host/
 .bench/ahpx/
