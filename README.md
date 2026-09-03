@@ -169,6 +169,29 @@ v0 reports binary fixture pass rate and operational diagnostics separately. It
 does **not** block changes until repeated calibration establishes a credible
 noise band and an approved comparison threshold.
 
+## What "Green" means
+
+The minimum Green policy is versioned in
+[`.bench/config.json`](.bench/config.json). All current pass-rate minimums are
+`1.0` (100%): this small v0 suite treats any failed behavioral task as a failed
+factory run rather than averaging it away.
+
+| Scope | Minimum required for Green |
+| --- | --- |
+| One attempt | All four mechanical oracles pass: visible tests, a changed visible test file, allowed-file boundary, and hidden acceptance check. The exact skill must be loaded, the exact pinned model must be selected, and the attempt must stay within 15 minutes, 30 turns, and 80 tool calls. |
+| Calibration | Run all 3 tasks for 5 unchanged suites: **15 / 15 passing attempts** (100%), with **5 / 5 passes for every individual task** and all attempt prerequisites satisfied. Human review of the recorded transcripts/diffs remains required before approving a baseline. |
+| Candidate report | Run all 3 tasks for 3 suites: **9 / 9 passing attempts** (100%), with **3 / 3 passes for every individual task** and all attempt prerequisites satisfied. |
+
+Green is an evaluation label, **not yet a merge gate**. A candidate can only be
+called Green after a manually approved calibration baseline exists. Once a
+future comparison threshold is based on measured variance, a candidate must
+also remain within that per-task regression threshold; it will become an
+additional Green criterion before CI is allowed to block changes.
+
+The current standalone BYOK limitation prevents a native Agent Host attempt
+from reaching this policy. The result is therefore neither Green nor Red until
+the host can advertise the pinned local model; it is a **blocked preflight**.
+
 ## Extending the harness
 
 ### Add a task
@@ -185,7 +208,9 @@ noise band and an approved comparison threshold.
 5. Add or update [`tests/check.test.ts`](tests/check.test.ts) to prove the
    oracle accepts a correct solution and rejects a meaningful incorrect one.
 6. Run `npm run build` and `npm test`, then include the new task in
-   calibration before changing the baseline.
+   calibration before changing the baseline. Update the Green counts above and
+   the versioned `evaluation.green` policy: the suite-wide pass total is
+   `task count × suite count`, and every task must pass every run.
 
 Do not make a task’s oracle depend only on the tests the agent can edit. The
 hidden check is what turns a plausible-looking change into a benchmark.

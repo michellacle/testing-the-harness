@@ -30,6 +30,15 @@
   "evaluation": {
     "calibrationSuites": 5,
     "candidateSuites": 3,
-    "mode": "report-only"
+    "mode": "report-only",
+    "green": {
+      "minimumAttemptPassRate": 1,
+      "minimumCalibrationPassRate": 1,
+      "minimumCandidatePassRate": 1,
+      "requireEveryTaskToPassEveryRun": true,
+      "requireSkillLoaded": true,
+      "requirePinnedModel": true,
+      "requireBudgetCompliance": true
+    }
   }
 }
