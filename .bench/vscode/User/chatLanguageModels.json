@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Pinned local Qwen",
+    "vendor": "customendpoint",
+    "apiKey": "local-benchmark-only",
+    "apiType": "chat-completions",
+    "models": [
+      {
+        "id": "Qwen2.5-Coder-7B-Instruct-GGUF",
+        "name": "Qwen2.5-Coder-7B-Instruct GGUF Q4_K_M",
+        "url": "http://127.0.0.1:8080/v1/chat/completions",
+        "toolCalling": true,
+        "contextWindow": 16384,
+        "maxOutputTokens": 4096,
+        "modelOptions": {
+          "temperature": 0,
+          "seed": 424242
+        }
+      }
+    ]
+  }
+]

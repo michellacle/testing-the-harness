@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "todo-completion",
+      "fixture": ".bench/fixtures/todo-completion",
+      "prompt": "Add the requested todo-completion feature. Follow the repository conventions, add focused tests, and run the relevant validation.",
+      "allowedChanges": ["src/todos.ts", "src/todos.test.ts"]
+    },
+    {
+      "id": "email-normalization",
+      "fixture": ".bench/fixtures/email-normalization",
+      "prompt": "Add the requested email-normalization feature. Follow the repository conventions, add focused tests, and run the relevant validation.",
+      "allowedChanges": ["src/users.ts", "src/users.test.ts"]
+    },
+    {
+      "id": "cart-quantity",
+      "fixture": ".bench/fixtures/cart-quantity",
+      "prompt": "Add the requested cart-quantity feature. Follow the repository conventions, add focused tests, and run the relevant validation.",
+      "allowedChanges": ["src/cart.ts", "src/cart.test.ts"]
+    }
+  ]
+}
